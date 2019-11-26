@@ -1,0 +1,193 @@
+
+% ===============================================
+% MATH 29: Discrete Mathematics           Fall 2018
+% hw_template.tex
+% ===============================================
+
+% -------------------------------------------------------------------------
+% You can ignore this preamble. Go on
+% down to the section that says "START HERE" 
+% -------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage[margin=1.5in]{geometry} % Please keep the margins at 1.5 so that there is space for grader comments.
+\usepackage{amsmath,amsthm,amssymb,hyperref}
+
+\newcommand{\R}{\mathbf{R}}  
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Q}{\mathbf{Q}}
+
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{claim}[2][Claim]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{proposition}[2][Proposition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+\begin{document}
+
+\large % please keep the text at this size for ease of reading.
+\linespread{1.5} % please keep 1.5 line spacing so that there is space for grader comments.
+
+% ------------------------------------------ %
+%                 START HERE             %
+% ------------------------------------------ %
+
+{\Large MATH 3310 % Replace with appropriate number -- keep this THE SAME even when you revise and resubmit.
+\hfill  Convergence of Alternating Harmonic to log(2)}
+
+\begin{center}
+{\Large Nick Figgins} % Replace "Author's Name" with your name
+\end{center}
+\vspace{0.05in}
+
+% -----------------------------------------------------
+% The following two environments (claim, proof) are
+% where you will enter the statement and proof of your
+% first problem for this assignment.
+%
+% In the theorem environment, you can replace the word
+% "theorem" in the \begin and \end commands with
+% "theorem", "proposition", "lemma", etc., depending on
+% what you are proving. 
+% -----------------------------------------------------
+
+\begin{claim}{}
+The alternating harmonic series $\sum_{n=1}^{\infty} \frac{(-1)^{(n+1)}}{n} $ converges to $\log{2} = 0.693147181...$ 
+\end{claim}
+
+This claim will be proven using Exercise 7.5.8 (d) and (e) in [A]. I will begin with part (d), first proving the convergence of the sequence: 
+\begin{equation}
+    \gamma_n = (1 + \frac{1}{2} + \frac{1}{3} + ... + \frac{1}{n}) - \log{n}
+\end{equation}
+After I have proven the convergence of $\gamma_n$, I will use the definitions of $\gamma_n$ and $\gamma_{2n}$ to derive a value for $\log{2}$ by considering the sequence $\gamma_{2n} - \gamma_n$. Throughout this proof, the fact that $log(x) = \int_{1}^{x} \frac{1}{t} dt$ will be used. 
+\begin{proof} 
+
+Convergence of (1): 
+
+To prove that $\gamma_n$ is bounded below (by zero), I will prove that $(1 + \frac{1}{2} + \frac{1}{3} + ... + \frac{1}{n}) \geq \log{n}$ $\forall$ $n \in \mathbf{N}$
+
+$\log{n} = \int_{1}^{n} \frac{1}{t} dt = \int_{1}^{2} \frac{1}{t} dt + \int_{2}^{3} \frac{1}{t} dt + ... + \int_{n-1}^{n} \frac{1}{t} dt$
+
+For each of these definite integrals, $\frac{1}{t}$ is at its maximum value when t is equal to its lower bound value, i.e. $\forall t \in [n, n+1]$, $\frac{1}{t} \leq \frac{1}{n}$. So, we can plug in these upper values for $\frac{1}{t}$ into our integrals to get an integral greater than or equal to our integrals evaluated with $\frac{1}{t}$:
+
+$\int_{1}^{n} \frac{1}{t} dt = \int_{1}^{2} \frac{1}{t} dt + \int_{2}^{3} \frac{1}{t} dt + ... + \int_{n-1}^{n} \frac{1}{t} dt \leq \int_{1}^{2} \frac{1}{1} dt + \int_{2}^{3} \frac{1}{2} dt + ... + \int_{n-1}^{n} \frac{1}{n-1} dt$
+
+$\int_{1}^{2} \frac{1}{1} dt + \int_{2}^{3} \frac{1}{2} dt + ... + \int_{n-1}^{n} \frac{1}{n-1} dt = (2-1) + (\frac{3}{2} - 1) + ... + (\frac{n}{n-1} - \frac{n-1}{n-1}) = 1 + \frac{1}{2} + ... + (\frac{1}{n-1})$
+
+$\implies \int_{1}^{n} \frac{1}{t} dt \leq (1 + \frac{1}{2} + ... + \frac{1}{n-1})$
+
+$\implies \gamma_n = (1 + \frac{1}{2} + ... + \frac{1}{n}) - \int_{1}^{n} \frac{1}{t} dt \geq (1 + \frac{1}{2} + ... + \frac{1}{n}) - (1 + \frac{1}{2} + ... + \frac{1}{n-1}) = \frac{1}{n}$
+
+$\implies \gamma_n \geq \frac{1}{n}$
+
+Thus we have that $\gamma_n$ is greater than or equal to $\frac{1}{n}$ $\forall$ $n \in \mathbf{N}$, proving that $\gamma_n$ is bounded below by zero since $\frac{1}{n} > 0$ $\forall n$ $\in \mathbf{N}$.
+
+
+Next, I will show that $(\gamma_n)$ is decreasing. 
+
+$\gamma_n = (1 + \frac{1}{2} + \frac{1}{3} + ... + \frac{1}{n}) - \ln{n} = \sum_{k=1}^{n} \frac{1}{k} - \ln{(n)}$
+
+$\gamma_{n+1} = \sum_{k=1}^{n+1} \frac{1}{k} - \ln{(n+1)}$
+
+$\gamma_{n+1} \leq \gamma_n \iff \sum_{k=1}^{n+1} \frac{1}{k} - \ln{(n+1)} \leq   \sum_{k=1}^{n} \frac{1}{k} - \ln{(n)}$
+
+$\iff \frac{1}{n+1} + \sum_{k=1}^{n} \frac{1}{k} - \ln{(n+1)} \leq \sum_{k=1}^{n} \frac{1}{k} - \ln{(n)}$
+
+$\iff \frac{1}{n+1} - \ln{(n+1)} \leq - \ln{(n)}$
+
+$\iff \frac{1}{n+1} \leq \ln{(n+1)} - \ln{(n)} =  \int_{1}^{n+1} \frac{1}{t} dt - \int_{1}^{n} \frac{1}{t} dt = \int_{n}^{n+1} \frac{1}{t} dt$
+
+$\int_{n}^{n+1} \frac{1}{t} dt$ is at its minimum when t = n+1, so we can plug in this t value into the integral to state that our given integral must be greater than or equal to this value:
+
+$\int_{n}^{n+1} \frac{1}{n+1} dt \leq \int_{n}^{n+1} \frac{1}{t} dt$
+
+$\int_{n}^{n+1} \frac{1}{n+1} dt = \frac{1}{n+1} \implies \frac{1}{n+1} \leq \int_{n}^{n+1} \frac{1}{t} dt$
+
+So we have that the statement is true for all $n \in \mathbf{N}$, thus this implication proves that $\gamma_{n+1} \leq \gamma_n$ which implies that the sequence is decreasing. Then, since $(\gamma_n)$ is decreasing and bounded below, we have that the sequence must converge by the Monotone Convergence Theorem.
+
+
+Knowing that $(\gamma_n)$ converges, we must have that $(\gamma_{2n})$ also converges as $n \rightarrow \infty$ and to the same value as $(\gamma_n)$. Thus, we must also have that the sequence $\lim_{n \rightarrow \infty} (\gamma_n - \gamma_{2n}) = 0$.
+
+$\lim_{n \rightarrow \infty} (\gamma_n - \gamma_{2n}) = 0$
+
+$\implies \lim_{n \rightarrow \infty} ((\sum_{k=1}^{n} \frac{1}{k} - \log(n)) - (\sum_{k=1}^{2n} \frac{1}{k} - \log(2n))) = 0$
+
+$\implies \lim_{n \rightarrow \infty} ((\sum_{k=1}^{n} \frac{1}{k} - \sum_{k=1}^{2n} \frac{1}{k} - \log(n) + \log(2n)) = 0$
+
+Using log rules proven in HW 12, we can rewrite $\log(2n)$ as $\log(2) + \log(n)$, giving: 
+
+$\implies \lim_{n \rightarrow \infty} ((\sum_{k=1}^{n} \frac{1}{k} - \sum_{k=1}^{2n} \frac{1}{k} - \log(n) + \log(n) + \log(2)) = 0$
+
+$\implies \lim_{n \rightarrow \infty} ((\sum_{k=1}^{n} \frac{1}{k} - \sum_{k=1}^{2n} \frac{1}{k} + \log(2)) = 0$
+
+Since $\log(2)$ is a constant, we can rewrite this by the ALT as:
+
+$\lim_{n \rightarrow \infty} ((\sum_{k=1}^{n} \frac{1}{k} - \sum_{k=1}^{2n} \frac{1}{k}) + \log(2) = 0$
+
+$\implies \lim_{n \rightarrow \infty} ((\sum_{k=1}^{n} \frac{1}{k} - \sum_{k=1}^{2n} \frac{1}{k}) = -\log(2)$
+
+$\implies \lim_{n \rightarrow \infty} ( - \sum_{k=n+1}^{2n} \frac{1}{k}) = -\log(2)$
+
+$\implies -\lim_{n \rightarrow \infty} (\sum_{k=n+1}^{2n} \frac{1}{k}) = -\log(2)$
+
+$\implies \lim_{n \rightarrow \infty} (\sum_{k=n+1}^{2n} \frac{1}{k}) = \log(2)$
+
+
+
+ Next, I will prove that $\sum_{k=n+1}^{2n} \frac{1}{k} =  \sum_{i=1}^{2n} \frac{(-1)^{i+1}}{i}$ using proof by induction.
+
+Let n = 1:
+$\sum_{k=2}^{2} \frac{1}{k} =  \sum_{i=1}^{2} \frac{(-1)^{i+1}}{i}$
+$ \implies \frac{1}{2} =  1 - \frac{1}{2} = \frac{1}{2}$
+
+Let n = 2:
+$\sum_{k=3}^{4} \frac{1}{k} =  \sum_{i=1}^{4} \frac{(-1)^{i+1}}{i}$
+$ \implies \frac{1}{3} + \frac{1}{4} =  1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4}$
+
+Adding $\frac{1}{4}$ to both sides yields:
+$\frac{1}{3} + \frac{1}{2} = 1 - \frac{1}{2} + \frac{1}{3}$
+$\implies \frac{1}{3} + \frac{1}{2} = \frac{1}{2} + \frac{1}{3}$.
+
+So, the above statement is true for n=1 and n=2. Assume that the above is true for n=r. Now, I will prove this true for n=r+1:
+
+$\sum_{k=n+1}^{2r} \frac{1}{k} =  \sum_{i=1}^{2r} \frac{(-1)^{i+1}}{i} \implies \sum_{k=r+1}^{2r} \frac{1}{k} - \frac{1}{r+1} =  \sum_{i=1}^{2n} \frac{(-1)^{i+1}}{i} - \frac{1}{r+1}$
+
+$\sum_{k=r+1}^{2r} \frac{1}{k} - \frac{1}{r+1}$ can be rewritten as a single sum by removing the $(r+1)^{th}$ index to get: $\sum_{k=r+2}^{2r} \frac{1}{k}$. Next, we need our summation to go to $2(r+1) = 2r + 2$, which we can do by adding $\frac{1}{2r+1} + \frac{1}{2r+2}$ on both sides.
+
+$\sum_{k=r+2}^{2r} \frac{1}{k} + \frac{1}{2r+1} + \frac{1}{2r+2} = \sum_{i=1}^{2r} \frac{(-1)^{i+1}}{i} - \frac{1}{r+1} + \frac{1}{2r+1} + \frac{1}{2r+2}$
+
+$\implies \sum_{k=r+2}^{2r+2} \frac{1}{k} = \sum_{i=1}^{2r} \frac{(-1)^{i+1}}{i} - \frac{1}{r+1} + \frac{1}{2r+1} + \frac{1}{2r+2}$
+
+The left hand side of the equation is now correctly defined for $n = r+1$. Now, the right hand side can be further simplified:
+
+$\sum_{i=1}^{2r} \frac{(-1)^{i+1}}{i} - \frac{1}{r+1} + \frac{1}{2r+1} + \frac{1}{2r+2} = \sum_{i=1}^{2r} \frac{(-1)^{i+1}}{i} - \frac{2}{2r+2} + \frac{1}{2r+1} + \frac{1}{2r+2}$
+
+$= \sum_{i=1}^{2r} \frac{(-1)^{i+1}}{i} - \frac{1}{2r+2} + \frac{1}{2r+1}$
+
+$= \sum_{i=1}^{2r+2} \frac{(-1)^{i+1}}{i}$.
+
+Thus, we now have that $\sum_{k=r+2}^{2r+2} \frac{1}{k} = \sum_{i=1}^{2r+2} \frac{(-1)^{i+1}}{i}$, showing that our statement is true for n = r + 1 and $\forall$ $n \in \mathbf{N}$.
+
+So, we have:
+
+$\log(2) = \lim_{n \rightarrow \infty} \sum_{k=n+1}^{2n} \frac{1}{k} = \lim_{n \rightarrow \infty} \sum_{i=1}^{2n} \frac{(-1)^{i+1}}{i}$
+
+Now, by the alternating series test, we know that $\sum_{i=1}^{\infty} \frac{(-1)^{i+1}}{i}$ converges since we can let $(a_n) = \frac{1}{i}$ which is both decreasing and converges to zero as $i \rightarrow \infty$. Thus, we can set the partial sum of our series to $S_m =  \sum_{i=1}^{2m} \frac{(-1)^{i+1}}{i}$. Then we have that $\lim_{m \rightarrow \infty} S_m = \log(2)$ which implies that the infinite alternating harmonic series must also converge to this value, finally giving us:
+
+$\log(2) = \lim_{m \rightarrow \infty} S_m =  \sum_{i=1}^{\infty} \frac{(-1)^{i+1}}{i} = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + ...$
+
+\end{proof}
+
+\end{document}
+
